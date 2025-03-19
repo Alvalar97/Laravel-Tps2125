@@ -19,7 +19,7 @@ class Page2Controller extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        return view('productos');
     }
 
     /**
