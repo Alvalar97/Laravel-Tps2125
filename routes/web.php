@@ -1,14 +1,12 @@
 <?php
 
-use App\Http\Controllers\Page2Controller;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;  // Agrega esta línea
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'inicio'])->name('inicio');
-
 Route::get('/inicio', [PageController::class, 'inicio'])->name('inicio');
-
-Route::get('/productos', [Page2Controller::class, 'create'])->name('productos');
-
 Route::get('/nosotros', [PageController::class, 'nosotros'])->name('nosotros');
 
+// Ruta para listar productos usando el método index
+Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
