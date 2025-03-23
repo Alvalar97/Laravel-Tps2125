@@ -3,62 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Muestra el panel según el rol
+    public function dashboard()
     {
-        //
-    }
+        $admin = session('admin');
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // Verificar si hay un administrador autenticado
+        if (!$admin) {
+            return redirect()->route('inicio')->with('error', 'Acceso no autorizado');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $productos = Producto::all();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Si el rol es 'editor', mostrar editor.blade.php
+        if ($admin->rol === 'editor') {
+            return view('editor', compact('productos'));
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Por defecto, mostrar admin.blade.php
+        return view('admin', compact('productos'));
     }
 }

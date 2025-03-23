@@ -20,5 +20,14 @@ class PageController extends Controller
     {
         return view('nosotros');
     }
-}
 
+    public function admin()
+    {
+        return view('admin'); // Asegúrate de tener la vista admin.blade.php
+    }
+
+    public function editor()
+    {
+        return view('editor'); // Asegúrate de tener la vista editor.blade.php
+    }
+}
